@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "dreaming_mod:sweet_biome",
+  "features": "dreaming_mod:candy_tree_placed",
+  "step": "vegetal_decoration"
+}

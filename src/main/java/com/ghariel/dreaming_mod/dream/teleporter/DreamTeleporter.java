@@ -1,0 +1,36 @@
+package com.ghariel.dreaming_mod.dream.teleporter;
+
+import com.ghariel.dreaming_mod.block.DreamingBedBlock;
+import com.ghariel.dreaming_mod.dream.DreamType;
+import com.ghariel.dreaming_mod.dream.DreamSaveData;
+import com.ghariel.dreaming_mod.dream.PlayerDream;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.block.BedBlock;
+
+public class DreamTeleporter {
+
+    private static final int MAX_SPAWN_DISTANCE = 100000;
+
+    public static void teleport(ServerPlayer player, ServerLevel dimension, DreamSaveData saveData, BedBlock bed) {
+        RandomSource random = player.getRandom();
+        int level = 0;
+        if (bed instanceof DreamingBedBlock dreamingBed) {
+            level = dreamingBed.getDreamLevel();
+        }
+
+        int dreamIndex = random.nextInt(DreamType.levels[level].length);
+        String dreamTypeId = DreamType.getDreamTypeId(level, dreamIndex);
+        DreamType dream = DreamType.getDreamTypeById(dreamTypeId);
+        if (dream == null) {
+            return;
+        }
+        saveData.setPlayerDream(
+                player.getStringUUID(), new PlayerDream(player, dreamTypeId));
+        int x = random.nextInt(2 * MAX_SPAWN_DISTANCE + 1) - MAX_SPAWN_DISTANCE;
+        int z = random.nextInt(2 * MAX_SPAWN_DISTANCE + 1) - MAX_SPAWN_DISTANCE;
+        player.changeDimension(dimension, new DreamLevelTeleporter(new BlockPos(x, dream.getSpawnHeight(), z), dream));
+    }
+}
