@@ -31,6 +31,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> RICH_TREE_SAPLING = registerBlock("rich_tree_sapling",
             () -> new RichTreeSapling(new RichTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
 
+    public static final RegistryObject<Block> CHOCOLATE_BUSH_BLOCK = registerBlock("chocolate_bush",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.SWEET_BERRY_BUSH)));
+
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> registryObject = BLOCKS.register(name, block);
         registerBlockItem(name, registryObject);
