@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "deaming_mod:block/candy_tree_log_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "deaming_mod:block/candy_tree_log"
+    },
+    "axis=z": {
+      "model": "deaming_mod:block/candy_tree_log_horizontal",
+      "x": 90
+    }
+  }
+}
