@@ -1,4 +1,15 @@
 {
+  "creativetab.dreaming_mod.dreaming_mod_items_tab": "Dream Items",
+  "creativetab.dreaming_mod.dreaming_mod_blocks_tab": "Dream Blocks",
+  "item.dreaming_mod.stardust_infused_silk": "Stardust Infused Silk",
   "block.dreaming_mod.cake_block": "Cake Block",
-  "block.dreaming_mod.pancake_block": "Pancake Block"
+  "block.dreaming_mod.pancake_block": "Pancake Block",
+  "block.dreaming_mod.chocolate_block": "Chocolate Block",
+  "block.dreaming_mod.candy_block": "Candy Block",
+  "block.dreaming_mod.candy_tree_sapling": "Candy Tree Sapling",
+  "block.dreaming_mod.rich_tree_sapling": "Rich Tree Sapling",
+  "block.dreaming_mod.candy_jungle_tree_sapling": "Candy Jungle Tree Sapling",
+  "block.dreaming_mod.chocolate_bush": "Chocolate Bush",
+  "block.dreaming_mod.no_dream_bed": "No Dream Bed",
+  "block.dreaming_mod.star_bed": "Star Bed"
 }

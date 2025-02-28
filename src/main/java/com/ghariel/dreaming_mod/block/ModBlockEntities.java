@@ -14,6 +14,7 @@ public class ModBlockEntities {
     public static final RegistryObject<BlockEntityType<DreamingBedBlockEntity>> DREAMING_BED_BLOCK_ENTITY_TYPE =
             BLOCK_ENTITIES.register("dreaming_bed_block_entity", () ->
                     BlockEntityType.Builder.of(DreamingBedBlockEntity::new,
-                            ModBlocks.NO_DREAM_BED_BLOCK.get()
+                            ModBlocks.NO_DREAM_BED_BLOCK.get(),
+                            ModBlocks.STAR_BED_BLOCK.get()
                     ).build(null));
 }

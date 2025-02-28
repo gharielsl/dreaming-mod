@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "dreaming_mod:item/stardust_infused_silk"
+  }
+}
