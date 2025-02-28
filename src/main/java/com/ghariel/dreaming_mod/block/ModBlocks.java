@@ -1,11 +1,13 @@
 package com.ghariel.dreaming_mod.block;
 
 import com.ghariel.dreaming_mod.DreamingMod;
+import com.ghariel.dreaming_mod.block.bed.NoDreamBed;
 import com.ghariel.dreaming_mod.item.ModItems;
 import com.ghariel.dreaming_mod.worldgen.feature.tree.CandyJungleTreeGrower;
 import com.ghariel.dreaming_mod.worldgen.feature.tree.CandyTreeGrower;
 import com.ghariel.dreaming_mod.worldgen.feature.tree.RichTreeGrower;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -47,6 +49,8 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> CHOCOLATE_BLOCK = registerBlock("chocolate_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
+
+    public static final RegistryObject<Block> NO_DREAM_BED_BLOCK = BLOCKS.register("no_dream_bed", () -> new NoDreamBed(DyeColor.WHITE));
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> registryObject = BLOCKS.register(name, block);

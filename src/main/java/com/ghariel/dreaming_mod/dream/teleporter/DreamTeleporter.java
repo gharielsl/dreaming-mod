@@ -1,6 +1,6 @@
 package com.ghariel.dreaming_mod.dream.teleporter;
 
-import com.ghariel.dreaming_mod.block.DreamingBedBlock;
+import com.ghariel.dreaming_mod.block.bed.DreamingBedBlock;
 import com.ghariel.dreaming_mod.dream.DreamType;
 import com.ghariel.dreaming_mod.dream.DreamSaveData;
 import com.ghariel.dreaming_mod.dream.PlayerDream;
@@ -16,12 +16,16 @@ public class DreamTeleporter {
 
     public static void teleport(ServerPlayer player, ServerLevel dimension, DreamSaveData saveData, BedBlock bed) {
         RandomSource random = player.getRandom();
-        int level = 0;
+        String level = "default";
         if (bed instanceof DreamingBedBlock dreamingBed) {
             level = dreamingBed.getDreamLevel();
         }
+        DreamType[] dreamTypes = DreamType.levels.get(level);
+        if (dreamTypes.length == 0) {
+            return;
+        }
 
-        int dreamIndex = random.nextInt(DreamType.levels[level].length);
+        int dreamIndex = random.nextInt(dreamTypes.length);
         String dreamTypeId = DreamType.getDreamTypeId(level, dreamIndex);
         DreamType dream = DreamType.getDreamTypeById(dreamTypeId);
         if (dream == null) {

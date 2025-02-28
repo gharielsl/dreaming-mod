@@ -5,6 +5,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.GameType;
 
 import javax.annotation.Nullable;
+import java.util.Map;
 
 public class DreamType {
 
@@ -14,7 +15,12 @@ public class DreamType {
             new DreamType("dream_level_00_var_01", null, 128)
     };
 
-    public static DreamType[][] levels = new DreamType[][]{ level0 };
+    public static DreamType[] noDream = new DreamType[]{};
+
+    public static Map<String, DreamType[]> levels = Map.of(
+      "default", level0,
+      "no_dream", noDream
+    );
 
     private final ResourceLocation structure;
     private final GameType gameType;
@@ -43,15 +49,15 @@ public class DreamType {
     }
 
     public static DreamType getDreamTypeById(String id) {
-        String[] indices = id.replace("L", "").split("i");
+        String[] indices = id.replace("[L]", "").split("\\[i]");
         try {
-            return levels[Integer.parseInt(indices[0])][Integer.parseInt(indices[1])];
+            return levels.get(indices[0])[Integer.parseInt(indices[1])];
         } catch (Exception e) {
             return null;
         }
     }
 
-    public static String getDreamTypeId(int level, int index) {
-        return "L" + level + "i" + index;
+    public static String getDreamTypeId(String level, int index) {
+        return "[L]" + level + "[i]" + index;
     }
 }

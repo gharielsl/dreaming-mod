@@ -52,14 +52,16 @@ public class DreamEventHandler {
                 return;
             }
             BlockPos bedPos = player.getRespawnPosition();
+            BedBlock bed = null;
             if (bedPos != null) {
                 Level currentLevel = player.level();
                 BlockState state = currentLevel.getBlockState(bedPos);
-                if (state.getBlock() instanceof BedBlock) {
+                if (state.getBlock() instanceof BedBlock bedBlock) {
                     currentLevel.setBlock(bedPos, state.setValue(BedBlock.OCCUPIED, false), 3);
+                    bed = bedBlock;
                 }
             }
-            DreamTeleporter.teleport(player, dreamLevel, saveData, null);
+            DreamTeleporter.teleport(player, dreamLevel, saveData, bed);
         }
     }
 
