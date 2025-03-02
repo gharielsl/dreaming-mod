@@ -65,7 +65,7 @@ public class DreamingBedRenderer implements BlockEntityRenderer<DreamingBedBlock
         poseStack.mulPose(Axis.ZP.rotationDegrees(180.0F + direction.toYRot()));
         poseStack.translate(-0.5, -0.5, -0.5);
         VertexConsumer vertexconsumer = material.buffer(multiBufferSource, RenderType::entitySolid);
-        model.render(poseStack, vertexconsumer, packedLight, packedOverlay);
+        model.render(poseStack, vertexconsumer, 15728880, packedOverlay);
         poseStack.popPose();
     }
 }

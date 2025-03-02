@@ -1,11 +1,11 @@
 {
-  "name": "dreaming_mod:pancake/start_pool",
+  "name": "dreaming_mod:grave_loot_pool",
   "fallback": "minecraft:empty",
   "elements": [
     {
       "weight": 1,
       "element": {
-        "location": "dreaming_mod:pancake",
+        "location": "dreaming_mod:grave_loot",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"

@@ -34,6 +34,11 @@ public class DreamingBedBlock extends BedBlock {
     }
 
     @Override
+    public int getLightEmission(BlockState state, BlockGetter level, BlockPos pos) {
+        return 4;
+    }
+
+    @Override
     public @NotNull RenderShape getRenderShape(BlockState blockState){
         return RenderShape.ENTITYBLOCK_ANIMATED;
     }

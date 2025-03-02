@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "dreaming_mod:sweet_house",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 57528465,
+    "spacing": 20,
+    "separation": 6,
+    "type": "minecraft:random_spread"
+  }
+}

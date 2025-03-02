@@ -1,9 +1,9 @@
 {
   "type": "minecraft:jigsaw",
-  "start_pool": "dreaming_mod:pancake/start_pool",
-  "size": 1,
+  "start_pool": "dreaming_mod:grave_zombie/start_pool",
+  "size": 2,
   "max_distance_from_center": 80,
-  "biomes": "#dreaming_mod:has_structure/pancake",
+  "biomes": "#dreaming_mod:has_structure/grave_zombie",
   "step": "surface_structures",
   "start_height": {
     "absolute": 0
@@ -16,7 +16,7 @@
       "bounding_box": "piece",
       "spawns": [
         {
-          "type": "minecraft:parrot",
+          "type": "minecraft:zombie",
           "weight": 1,
           "minCount": 1,
           "maxCount": 4

@@ -15,6 +15,7 @@ public class ModBlockEntities {
             BLOCK_ENTITIES.register("dreaming_bed_block_entity", () ->
                     BlockEntityType.Builder.of(DreamingBedBlockEntity::new,
                             ModBlocks.NO_DREAM_BED_BLOCK.get(),
-                            ModBlocks.STAR_BED_BLOCK.get()
+                            ModBlocks.STAR_BED_BLOCK.get(),
+                            ModBlocks.CLOUD_BED_BLOCK.get()
                     ).build(null));
 }

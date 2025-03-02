@@ -1,32 +1,42 @@
 package com.ghariel.dreaming_mod.dream;
 
 import com.ghariel.dreaming_mod.DreamingMod;
+import com.ghariel.dreaming_mod.worldgen.dimension.ModDimensions;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.GameType;
+import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
 import java.util.Map;
 
 public class DreamType {
 
-    public static DreamType[] level0 = new DreamType[]{
-            new DreamType(null, null, -1),
-            new DreamType(null, GameType.CREATIVE, -1),
-            new DreamType("dream_level_00_var_01", null, 128)
-    };
-
     public static DreamType[] noDream = new DreamType[]{};
 
+    public static DreamType[] defaultLevel = new DreamType[]{
+            new DreamType(ModDimensions.DREAM_LEVEL_KEY, null, null, -1),
+            new DreamType(ModDimensions.DREAM_LEVEL_KEY, null, GameType.CREATIVE, -1),
+            new DreamType(ModDimensions.DREAM_LEVEL_KEY, "dream_default_01", null, 128)
+    };
+
+    public static DreamType[] starLevel = new DreamType[]{
+            new DreamType(ModDimensions.NIGHTMARE_LEVEL_KEY, null, null, -1)
+    };
+
     public static Map<String, DreamType[]> levels = Map.of(
-      "default", level0,
-      "no_dream", noDream
+            "no_dream", noDream,
+            "default", defaultLevel,
+            "star", starLevel
     );
 
+    private final ResourceKey<Level> dimension;
     private final ResourceLocation structure;
     private final GameType gameType;
     private final int spawnHeight;
 
-    public DreamType(@Nullable String structure, @Nullable GameType gameType, int spawnHeight) {
+    public DreamType(ResourceKey<Level> dimension, @Nullable String structure, @Nullable GameType gameType, int spawnHeight) {
+        this.dimension = dimension;
         if (structure != null) {
             this.structure = new ResourceLocation(DreamingMod.MOD_ID, structure);
         } else {
@@ -34,6 +44,10 @@ public class DreamType {
         }
         this.gameType = gameType;
         this.spawnHeight = spawnHeight;
+    }
+
+    public ResourceKey<Level> getDimension() {
+        return dimension;
     }
 
     public ResourceLocation getStructure() {

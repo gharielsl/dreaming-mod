@@ -19,6 +19,7 @@ public class ModCreativeTabs {
                     .title(Component.translatable("creativetab.dreaming_mod.dreaming_mod_items_tab"))
                     .displayItems((itemDisplayParameters, output) -> {
                         output.accept(ModItems.STARDUST_INFUSED_SILK.get());
+                        output.accept(ModItems.SKY_ESSENCE.get());
 
                     }).build());
 
@@ -37,6 +38,7 @@ public class ModCreativeTabs {
                         output.accept(ModBlocks.CHOCOLATE_BUSH_BLOCK.get());
                         output.accept(ModBlocks.NO_DREAM_BED_BLOCK.get());
                         output.accept(ModBlocks.STAR_BED_BLOCK.get());
+                        output.accept(ModBlocks.CLOUD_BED_BLOCK.get());
 
                     }).build());
 }

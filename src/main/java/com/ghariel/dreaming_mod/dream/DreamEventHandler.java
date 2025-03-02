@@ -5,6 +5,7 @@ import com.ghariel.dreaming_mod.dream.teleporter.DreamTeleporter;
 import com.ghariel.dreaming_mod.util.PlayerUtil;
 import com.ghariel.dreaming_mod.worldgen.dimension.ModDimensions;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -15,6 +16,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
@@ -22,6 +24,8 @@ import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.event.server.ServerStoppedEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+
+import java.awt.*;
 
 import static com.ghariel.dreaming_mod.util.PlayerUtil.randomizeInventory;
 
@@ -33,7 +37,7 @@ public class DreamEventHandler {
     @SubscribeEvent
     public static void onPlayerSleep(PlayerSleepInBedEvent event) {
         if (event.getEntity() instanceof ServerPlayer player) {
-            if (player.level().dimension() == ModDimensions.DREAM_LEVEL_KEY) {
+            if (ModDimensions.isDream(player.level().dimension())) {
                 event.setResult(Player.BedSleepingProblem.OTHER_PROBLEM);
                 player.kill();
             }
@@ -46,11 +50,6 @@ public class DreamEventHandler {
             if (event.updateLevel()) {
                 return;
             }
-            MinecraftServer server = player.getServer();
-            ServerLevel dreamLevel = server.getLevel(ModDimensions.DREAM_LEVEL_KEY);
-            if (dreamLevel == null) {
-                return;
-            }
             BlockPos bedPos = player.getRespawnPosition();
             BedBlock bed = null;
             if (bedPos != null) {
@@ -61,14 +60,16 @@ public class DreamEventHandler {
                     bed = bedBlock;
                 }
             }
-            DreamTeleporter.teleport(player, dreamLevel, saveData, bed);
+            DreamTeleporter.teleport(player, saveData, bed);
         }
     }
 
     @SubscribeEvent
-    public static void onPlayerChangedDimension(PlayerEvent.PlayerChangedDimensionEvent event) {
+    public static void onPlayerEnterPortal(EntityTravelToDimensionEvent event) {
         if (event.getEntity() instanceof ServerPlayer player) {
-            if (event.getTo() == ModDimensions.DREAM_LEVEL_KEY) {
+            ResourceKey<Level> from = player.level().dimension();
+            ResourceKey<Level> to = event.getDimension();
+            if (ModDimensions.isDream(to)) {
                 PlayerDream playerDream = saveData.getPlayerDream(player.getStringUUID());
                 if (playerDream == null) {
                     event.setCanceled(true);
@@ -85,6 +86,11 @@ public class DreamEventHandler {
                 saveData.setIsInDream(player.getStringUUID(), true);
                 randomizeInventory(player);
                 player.getInventory().setItem(0, new ItemStack(Items.RED_BED, 1));
+            } else if (ModDimensions.isDream(from)) {
+                ResourceKey<Level> respawnLevel = player.getRespawnDimension();
+                if (to != respawnLevel) {
+                    event.setCanceled(true);
+                }
             }
         }
     }

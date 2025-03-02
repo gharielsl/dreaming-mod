@@ -1,0 +1,62 @@
+{
+  "type": "chest",
+  "pools": [
+    {
+      "rolls": 8,
+      "bonus_rolls": 4,
+      "functions": [],
+      "entries": [
+        {
+          "type": "item",
+          "name": "minecraft:cake",
+          "weight": 2,
+          "functions": []
+        },
+        {
+          "type": "item",
+          "name": "minecraft:milk_bucket",
+          "weight": 2
+        },
+        {
+          "type": "item",
+          "name": "minecraft:sweet_berries",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "minecraft:limit_count",
+              "limit": 3
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "minecraft:cookie",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "minecraft:limit_count",
+              "limit": 3
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "minecraft:sugar",
+          "weight": 3,
+          "functions": [
+            {
+              "function": "minecraft:limit_count",
+              "limit": 3
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "dreaming_mod:candy_tree_sapling",
+          "weight": 1
+        }
+      ]
+    }
+  ],
+  "functions": []
+}

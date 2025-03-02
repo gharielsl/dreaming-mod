@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "dreaming_mod:grave_zombie",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 834513,
+    "spacing": 20,
+    "separation": 6,
+    "type": "minecraft:random_spread"
+  }
+}

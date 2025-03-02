@@ -13,7 +13,6 @@ public class CandyTreeSapling extends SaplingBlock {
 
     @Override
     protected boolean mayPlaceOn(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
-        return blockState.getBlock() == ModBlocks.CAKE_BLOCK.get() ||
-                blockState.getBlock() == ModBlocks.PANCAKE_BLOCK.get();
+        return blockState.getBlock() == ModBlocks.CAKE_BLOCK.get();
     }
 }

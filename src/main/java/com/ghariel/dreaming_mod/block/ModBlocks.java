@@ -1,6 +1,7 @@
 package com.ghariel.dreaming_mod.block;
 
 import com.ghariel.dreaming_mod.DreamingMod;
+import com.ghariel.dreaming_mod.block.bed.CloudBed;
 import com.ghariel.dreaming_mod.block.bed.NoDreamBed;
 import com.ghariel.dreaming_mod.block.bed.StarBed;
 import com.ghariel.dreaming_mod.item.ModItems;
@@ -47,16 +48,19 @@ public class ModBlocks {
             () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
 
     public static final RegistryObject<Block> CANDY_BLOCK = registerBlock("candy_block",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
 
     public static final RegistryObject<Block> CHOCOLATE_BLOCK = registerBlock("chocolate_block",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
 
     public static final RegistryObject<Block> NO_DREAM_BED_BLOCK =
             BLOCKS.register("no_dream_bed", () -> new NoDreamBed(DyeColor.WHITE));
 
     public static final RegistryObject<Block> STAR_BED_BLOCK =
             BLOCKS.register("star_bed", () -> new StarBed(DyeColor.WHITE));
+
+    public static final RegistryObject<Block> CLOUD_BED_BLOCK =
+            BLOCKS.register("cloud_bed", () -> new CloudBed(DyeColor.WHITE));
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> registryObject = BLOCKS.register(name, block);
