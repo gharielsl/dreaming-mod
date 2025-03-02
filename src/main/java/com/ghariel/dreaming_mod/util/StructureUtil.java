@@ -1,6 +1,5 @@
 package com.ghariel.dreaming_mod.util;
 
-import com.sk89q.jnbt.NBTConstants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -14,15 +13,15 @@ import java.util.Map;
 public class StructureUtil {
     public static Map<String, List<BlockPos>> getMarkers(StructureTemplate template) {
         CompoundTag templateNBT = template.save(new CompoundTag());
-        ListTag entities = templateNBT.getList("entities", NBTConstants.TYPE_COMPOUND);
+        ListTag entities = templateNBT.getList("entities", NBTUtil.TYPE_COMPOUND);
         Map<String, List<BlockPos>> markers = new HashMap<>();
 
         for (int i = 0; i < entities.size(); i++) {
             CompoundTag entityTag = entities.getCompound(i);
             CompoundTag entityNbt = entityTag.getCompound("nbt");
             if (entityNbt.getString("id").equals("minecraft:armor_stand")) {
-                ListTag pos = entityTag.getList("pos", NBTConstants.TYPE_DOUBLE);
-                ListTag tags = entityNbt.getList("Tags", NBTConstants.TYPE_STRING);
+                ListTag pos = entityTag.getList("pos", NBTUtil.TYPE_DOUBLE);
+                ListTag tags = entityNbt.getList("Tags", NBTUtil.TYPE_STRING);
                 BlockPos blockPos = new BlockPos(
                         (int) pos.getDouble(0),
                         (int) pos.getDouble(1),

@@ -4,6 +4,7 @@ import com.ghariel.dreaming_mod.DreamingMod;
 import com.ghariel.dreaming_mod.block.ModBlockEntities;
 import com.ghariel.dreaming_mod.block.bed.DreamingBedBlock;
 import com.ghariel.dreaming_mod.block.bed.DreamingBedBlockEntity;
+import com.ghariel.dreaming_mod.block.bed.NoDreamBed;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
@@ -19,6 +20,7 @@ import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoubleBlockCombiner;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -37,8 +39,8 @@ public class DreamingBedRenderer implements BlockEntityRenderer<DreamingBedBlock
     public void render(DreamingBedBlockEntity bed, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
         Material material = new Material(Sheets.BED_SHEET, new ResourceLocation(DreamingMod.MOD_ID, "entity/bed/" + bed.getDreamLevel()));
         Level level = bed.getLevel();
+        BlockState blockstate = bed.getBlockState();
         if (level != null) {
-            BlockState blockstate = bed.getBlockState();
             DoubleBlockCombiner.NeighborCombineResult<? extends DreamingBedBlockEntity> combineResult =
                     DoubleBlockCombiner.combineWithNeigbour(
                             ModBlockEntities.DREAMING_BED_BLOCK_ENTITY_TYPE.get(),
@@ -49,15 +51,15 @@ public class DreamingBedRenderer implements BlockEntityRenderer<DreamingBedBlock
                             bed.getBlockPos(),
                             (levelAccessor, pos) -> false);
             int i = combineResult.apply(new BrightnessCombiner<>()).get(combinedLight);
-            this.renderPiece(poseStack, buffer, blockstate.getValue(DreamingBedBlock.PART) ==
+            this.renderPiece(blockstate.getBlock(), poseStack, buffer, blockstate.getValue(DreamingBedBlock.PART) ==
                     BedPart.HEAD ? this.headRoot : this.footRoot, blockstate.getValue(HorizontalDirectionalBlock.FACING), material, i, combinedOverlay, false);
         } else {
-            this.renderPiece(poseStack, buffer, this.headRoot, Direction.SOUTH, material, combinedLight, combinedOverlay, false);
-            this.renderPiece(poseStack, buffer, this.footRoot, Direction.SOUTH, material, combinedLight, combinedOverlay, true);
+            this.renderPiece(blockstate.getBlock(), poseStack, buffer, this.headRoot, Direction.SOUTH, material, combinedLight, combinedOverlay, false);
+            this.renderPiece(blockstate.getBlock(), poseStack, buffer, this.footRoot, Direction.SOUTH, material, combinedLight, combinedOverlay, true);
         }
     }
 
-    private void renderPiece(PoseStack poseStack, MultiBufferSource multiBufferSource, ModelPart model, Direction direction, Material material, int packedLight, int packedOverlay, boolean foot) {
+    private void renderPiece(Block bed, PoseStack poseStack, MultiBufferSource multiBufferSource, ModelPart model, Direction direction, Material material, int packedLight, int packedOverlay, boolean foot) {
         poseStack.pushPose();
         poseStack.translate(0.0, 0.5625, foot ? -1.0 : 0.0);
         poseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
@@ -65,7 +67,10 @@ public class DreamingBedRenderer implements BlockEntityRenderer<DreamingBedBlock
         poseStack.mulPose(Axis.ZP.rotationDegrees(180.0F + direction.toYRot()));
         poseStack.translate(-0.5, -0.5, -0.5);
         VertexConsumer vertexconsumer = material.buffer(multiBufferSource, RenderType::entitySolid);
-        model.render(poseStack, vertexconsumer, 15728880, packedOverlay);
+        if (!(bed instanceof NoDreamBed)) {
+            packedLight = 15728880;
+        }
+        model.render(poseStack, vertexconsumer, packedLight, packedOverlay);
         poseStack.popPose();
     }
 }

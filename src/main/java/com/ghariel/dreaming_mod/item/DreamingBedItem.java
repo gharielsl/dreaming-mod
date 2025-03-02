@@ -8,8 +8,8 @@ import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 
 import java.util.function.Consumer;
 
-public class NoDreamBedItem extends BlockItem {
-    public NoDreamBedItem(Block block, Properties properties) {
+public class DreamingBedItem extends BlockItem {
+    public DreamingBedItem(Block block, Properties properties) {
         super(block, properties);
     }
 

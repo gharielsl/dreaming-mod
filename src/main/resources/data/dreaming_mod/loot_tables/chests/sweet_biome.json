@@ -52,6 +52,11 @@
         },
         {
           "type": "item",
+          "name": "dreaming_mod:candy_jungle_tree_sapling",
+          "weight": 2
+        },
+        {
+          "type": "item",
           "name": "dreaming_mod:candy_tree_sapling",
           "weight": 1
         }

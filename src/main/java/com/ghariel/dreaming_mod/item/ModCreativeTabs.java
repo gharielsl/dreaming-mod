@@ -20,6 +20,7 @@ public class ModCreativeTabs {
                     .displayItems((itemDisplayParameters, output) -> {
                         output.accept(ModItems.STARDUST_INFUSED_SILK.get());
                         output.accept(ModItems.SKY_ESSENCE.get());
+                        output.accept(ModItems.VOLCANIC_ASH_THREAD.get());
 
                     }).build());
 

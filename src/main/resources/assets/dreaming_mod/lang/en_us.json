@@ -1,8 +1,11 @@
 {
   "creativetab.dreaming_mod.dreaming_mod_items_tab": "Dream Items",
   "creativetab.dreaming_mod.dreaming_mod_blocks_tab": "Dream Blocks",
+
   "item.dreaming_mod.stardust_infused_silk": "Stardust Infused Silk",
   "item.dreaming_mod.sky_essence": "Sky Essence",
+  "item.dreaming_mod.volcanic_ash_thread": "Volcanic Ash Thread",
+
   "block.dreaming_mod.cake_block": "Cake Block",
   "block.dreaming_mod.pancake_block": "Pancake Block",
   "block.dreaming_mod.chocolate_block": "Chocolate Block",
@@ -13,5 +16,9 @@
   "block.dreaming_mod.chocolate_bush": "Chocolate Bush",
   "block.dreaming_mod.no_dream_bed": "No Dream Bed",
   "block.dreaming_mod.star_bed": "Star Bed",
-  "block.dreaming_mod.cloud_bed": "Cloud Bed"
+  "block.dreaming_mod.cloud_bed": "Cloud Bed",
+
+  "stardust_infused_silk.description": "Can be found inside a dream",
+  "sky_essence.description": "Can be found inside a dream",
+  "volcanic_ash_thread.description": "Can be found inside a nightmare"
 }

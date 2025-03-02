@@ -9,11 +9,14 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 public class PlayerUtil {
@@ -48,47 +51,21 @@ public class PlayerUtil {
         ServerLevel overworld = server.getLevel(Level.OVERWORLD);
         if (pos == null) {
             pos = overworld.getSharedSpawnPos();
-        } else {
-            pos = pos.above();
         }
         float angle = player.getRespawnAngle();
         ServerLevel respawnLevel = server.getLevel(player.getRespawnDimension());
         if (respawnLevel == null) {
             respawnLevel = overworld;
         }
-
-        AABB bb = player.getBoundingBox();
-
-        int searchSize = 4;
-        BlockPos nearest = null;
-        double nearestDistance = Double.POSITIVE_INFINITY;
-        for (int x = -searchSize; x < searchSize; x++) {
-            for (int y = -searchSize; y < searchSize; y++) {
-                for (int z = -searchSize; z < searchSize; z++) {
-                    if (y < respawnLevel.getMinBuildHeight()) {
-                        continue;
-                    }
-                    BlockPos currentPos = pos.offset(x, y, z);
-                    BlockState floor = respawnLevel.getBlockState(currentPos.below((int) Math.floor(bb.getYsize() / 2)));
-                    AABB currentBB = AABB.ofSize(currentPos.getCenter(), bb.getXsize(), bb.getYsize(), bb.getZsize());
-                    if (respawnLevel.noCollision(currentBB) && !floor.isAir()) {
-                        if (nearest == null) {
-                            nearest = currentPos;
-                        }
-                        double distance = pos.distToCenterSqr(currentPos.getCenter());
-                        if(distance < nearestDistance) {
-                            nearestDistance = distance;
-                            nearest = currentPos;
-                        }
-                    }
-                }
+        Vec3 respawnPos = pos.getCenter();
+        BlockState state = respawnLevel.getBlockState(pos);
+        if (state.getBlock() instanceof BedBlock bed) {
+            Optional<Vec3> v = bed.getRespawnPosition(state, player.getType(), respawnLevel, pos, angle, player);
+            if (v.isPresent()) {
+                respawnPos = v.get();
             }
         }
-        if (nearest != null) {
-            pos = nearest;
-        }
-
         player.teleportTo(respawnLevel,
-                pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, angle, 0);
+                respawnPos.x(), respawnPos.y(), respawnPos.z(), angle, 0);
     }
 }
