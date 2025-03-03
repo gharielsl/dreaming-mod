@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "///",
+    "BBW",
+    "OOO"
+  ],
+  "key": {
+    "/": {
+      "item": "dreaming_mod:stardust_infused_silk"
+    },
+    "W": {
+      "item": "minecraft:white_wool"
+    },
+    "B": {
+      "item": "minecraft:blue_wool"
+    },
+    "O": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "result": {
+    "item": "dreaming_mod:star_bed",
+    "count": 1
+  }
+}

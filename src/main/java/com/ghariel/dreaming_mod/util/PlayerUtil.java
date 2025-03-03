@@ -20,6 +20,7 @@ import java.util.Optional;
 import java.util.Random;
 
 public class PlayerUtil {
+
     public static void randomizeInventory(ServerPlayer player) {
         Inventory inventory = player.getInventory();
         inventory.clearContent();
@@ -43,6 +44,20 @@ public class PlayerUtil {
 
             inventory.setItem(slot, stack);
         }
+    }
+
+    public static LevelLocation getPlayerSpawn(ServerPlayer player) {
+        BlockPos pos = player.getRespawnPosition();
+        MinecraftServer server = player.getServer();
+        ServerLevel overworld = server.getLevel(Level.OVERWORLD);
+        if (pos == null) {
+            pos = overworld.getSharedSpawnPos();
+        }
+        ServerLevel respawnLevel = server.getLevel(player.getRespawnDimension());
+        if (respawnLevel == null) {
+            respawnLevel = overworld;
+        }
+        return new LevelLocation(respawnLevel, pos.getCenter());
     }
 
     public static void teleportToSpawn(ServerPlayer player) {

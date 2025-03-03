@@ -44,8 +44,11 @@ public class ModBlocks {
     public static final RegistryObject<Block> CHOCOLATE_BUSH_BLOCK = registerBlock("chocolate_bush",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.SWEET_BERRY_BUSH)));
 
-    public static final RegistryObject<Block> CANDY_TREE_LOG = registerBlock("candy_tree_log",
+    public static final RegistryObject<RotatedPillarBlock> CANDY_TREE_LOG = registerBlock("candy_tree_log",
             () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
+
+    public static final RegistryObject<Block> CANDY_TREE_PLANKS = registerBlock("candy_tree_planks",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
 
     public static final RegistryObject<Block> CANDY_BLOCK = registerBlock("candy_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));

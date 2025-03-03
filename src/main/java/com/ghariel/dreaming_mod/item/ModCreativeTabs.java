@@ -32,6 +32,8 @@ public class ModCreativeTabs {
                         output.accept(ModBlocks.CAKE_BLOCK.get());
                         output.accept(ModBlocks.PANCAKE_BLOCK.get());
                         output.accept(ModBlocks.CHOCOLATE_BLOCK.get());
+                        output.accept(ModBlocks.CANDY_TREE_LOG.get());
+                        output.accept(ModBlocks.CANDY_TREE_PLANKS.get());
                         output.accept(ModBlocks.CANDY_BLOCK.get());
                         output.accept(ModBlocks.CANDY_TREE_SAPLING.get());
                         output.accept(ModBlocks.RICH_TREE_SAPLING.get());

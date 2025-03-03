@@ -9,6 +9,8 @@
   "block.dreaming_mod.cake_block": "Cake Block",
   "block.dreaming_mod.pancake_block": "Pancake Block",
   "block.dreaming_mod.chocolate_block": "Chocolate Block",
+  "block.dreaming_mod.candy_tree_log": "Candy Tree Log",
+  "block.dreaming_mod.candy_tree_planks": "Candy Tree Planks",
   "block.dreaming_mod.candy_block": "Candy Block",
   "block.dreaming_mod.candy_tree_sapling": "Candy Tree Sapling",
   "block.dreaming_mod.rich_tree_sapling": "Rich Tree Sapling",
@@ -18,7 +20,9 @@
   "block.dreaming_mod.star_bed": "Star Bed",
   "block.dreaming_mod.cloud_bed": "Cloud Bed",
 
-  "stardust_infused_silk.description": "Can be found inside a dream",
-  "sky_essence.description": "Can be found inside a dream",
-  "volcanic_ash_thread.description": "Can be found inside a nightmare"
+  "description.stardust_infused_silk": "Can be found inside a dream",
+  "description.sky_essence": "Can be found inside a dream",
+  "description.volcanic_ash_thread": "Can be found inside a nightmare",
+
+  "lore.dreaming_mod.keep": "Remains in inventory after waking up"
 }

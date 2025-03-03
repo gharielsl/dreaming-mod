@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "dreaming_mod:lollipop",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 356239756,
+    "spacing": 10,
+    "separation": 3,
+    "type": "minecraft:random_spread"
+  }
+}

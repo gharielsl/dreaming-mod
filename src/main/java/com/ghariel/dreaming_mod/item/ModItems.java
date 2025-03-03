@@ -23,11 +23,11 @@ public class ModItems {
             () -> new DreamingBedItem(ModBlocks.CLOUD_BED_BLOCK.get(), new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     public static final RegistryObject<Item> STARDUST_INFUSED_SILK = ITEMS.register("stardust_infused_silk",
-            () -> new DescriptionItem("stardust_infused_silk.description", new Item.Properties().rarity(Rarity.UNCOMMON)));
+            () -> new DescriptionItem("description.stardust_infused_silk", new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     public static final RegistryObject<Item> SKY_ESSENCE = ITEMS.register("sky_essence",
-            () -> new DescriptionItem("sky_essence.description", new Item.Properties().rarity(Rarity.UNCOMMON)));
+            () -> new DescriptionItem("description.sky_essence", new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     public static final RegistryObject<Item> VOLCANIC_ASH_THREAD = ITEMS.register("volcanic_ash_thread",
-            () -> new DescriptionItem("volcanic_ash_thread.description", new Item.Properties().rarity(Rarity.UNCOMMON)));
+            () -> new DescriptionItem("description.volcanic_ash_thread", new Item.Properties().rarity(Rarity.UNCOMMON)));
 }

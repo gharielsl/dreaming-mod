@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "///",
+    "BBW",
+    "OOO"
+  ],
+  "key": {
+    "/": {
+      "item": "dreaming_mod:sky_essence"
+    },
+    "W": {
+      "item": "minecraft:white_wool"
+    },
+    "B": {
+      "item": "minecraft:blue_wool"
+    },
+    "O": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "result": {
+    "item": "dreaming_mod:cloud_bed",
+    "count": 1
+  }
+}

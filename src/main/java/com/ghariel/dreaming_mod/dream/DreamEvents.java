@@ -2,13 +2,19 @@ package com.ghariel.dreaming_mod.dream;
 
 import com.ghariel.dreaming_mod.DreamingMod;
 import com.ghariel.dreaming_mod.dream.teleporter.DreamTeleporter;
+import com.ghariel.dreaming_mod.util.LevelLocation;
+import com.ghariel.dreaming_mod.util.NBTUtil;
 import com.ghariel.dreaming_mod.util.PlayerUtil;
 import com.ghariel.dreaming_mod.worldgen.dimension.ModDimensions;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -25,12 +31,13 @@ import net.minecraftforge.event.server.ServerStoppedEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.ghariel.dreaming_mod.util.PlayerUtil.randomizeInventory;
 
 @Mod.EventBusSubscriber(modid = DreamingMod.MOD_ID)
-public class DreamEventHandler {
+public class DreamEvents {
 
     private static DreamSaveData saveData;
 
@@ -119,10 +126,40 @@ public class DreamEventHandler {
     @SubscribeEvent
     public static void onPlayerDied(LivingDeathEvent event) {
         if (event.getEntity() instanceof ServerPlayer player) {
-            if (player.level().getLevelData().isHardcore()) {
-                PlayerDream dream = saveData.getPlayerDream(player.getStringUUID());
-                if (dream != null) {
-                    if (dream.isInDream()) {
+            PlayerDream dream = saveData.getPlayerDream(player.getStringUUID());
+            if (dream != null) {
+                if (dream.isInDream()) {
+                    for (ItemStack item : player.getInventory().items) {
+                        if (item != null) {
+                            boolean keep = false;
+                            CompoundTag tag = item.getTag();
+                            if (tag != null) {
+                                ListTag lores = tag
+                                        .getCompound("display").getList("Lore", NBTUtil.TYPE_STRING);
+                                for (int i = 0; i < lores.size() && !keep; i++) {
+                                    if (lores.getString(i).equals("{\"italic\":false,\"translate\":\"lore.dreaming_mod.keep\"}")) {
+                                        lores.remove(i);
+                                        keep = true;
+                                    }
+                                }
+                                if (keep) {
+                                    item.setTag(tag);
+                                }
+                            }
+                            if (keep) {
+                                LevelLocation location = PlayerUtil.getPlayerSpawn(player);
+                                location.level().addFreshEntity(
+                                        new ItemEntity(
+                                                location.level(),
+                                                location.pos().x(),
+                                                location.pos().y(),
+                                                location.pos().z(),
+                                                item
+                                        ));
+                            }
+                        }
+                    }
+                    if (player.level().getLevelData().isHardcore()) {
                         event.setCanceled(true);
                         player.setHealth(player.getMaxHealth());
                         player.getInventory().clearContent();

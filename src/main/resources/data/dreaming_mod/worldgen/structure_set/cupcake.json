@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "dreaming_mod:cupcake",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 86153565,
+    "spacing": 20,
+    "separation": 6,
+    "type": "minecraft:random_spread"
+  }
+}

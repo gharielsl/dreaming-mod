@@ -1,8 +1,12 @@
 package com.ghariel.dreaming_mod.block.bed;
 
+import com.ghariel.dreaming_mod.util.NBTUtil;
 import com.ghariel.dreaming_mod.worldgen.dimension.ModDimensions;
+import com.sk89q.jnbt.StringTag;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -22,6 +26,7 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.checkerframework.checker.units.qual.C;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -79,13 +84,21 @@ public class DreamingBedBlock extends BedBlock {
         }
     }
 
-    private void handleBlockDestroyed(BlockPos pos, Level level) {
+    public void handleBlockDestroyed(BlockPos pos, Level level) {
         Item drop = null;
         if (drops != null) {
             drop = ForgeRegistries.ITEMS.getValue(drops);
         }
         if (ModDimensions.isDream(level.dimension()) && drop != null) {
-            ItemEntity entity = new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(drop));
+            ItemStack stack = new ItemStack(drop);
+            CompoundTag tag = new CompoundTag();
+            tag.put("display", new CompoundTag());
+            tag.getCompound("display").put("Lore", new ListTag());
+            CompoundTag stringTag = new CompoundTag(); // why mojang??
+            stringTag.putString("tag", "{\"italic\":false,\"translate\":\"lore.dreaming_mod.keep\"}");
+            tag.getCompound("display").getList("Lore", NBTUtil.TYPE_STRING).add(stringTag.get("tag"));
+            stack.setTag(tag);
+            ItemEntity entity = new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), stack);
             level.addFreshEntity(entity);
         } else {
             ItemEntity entity = new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(Item.BY_BLOCK.get(this)));

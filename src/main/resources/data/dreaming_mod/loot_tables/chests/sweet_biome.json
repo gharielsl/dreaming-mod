@@ -63,5 +63,23 @@
       ]
     }
   ],
-  "functions": []
+  "functions": [
+    {
+      "function": "minecraft:set_lore",
+      "entity": "this",
+      "lore": [
+        {
+          "translate": "lore.dreaming_mod.keep",
+          "italic": false
+        }
+      ],
+      "replace": true,
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.1
+        }
+      ]
+    }
+  ]
 }
