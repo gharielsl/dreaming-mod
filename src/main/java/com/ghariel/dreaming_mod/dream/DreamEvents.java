@@ -143,7 +143,13 @@ public class DreamEvents {
                                     }
                                 }
                                 if (keep) {
-                                    item.setTag(tag);
+                                    CompoundTag copy = tag.copy();
+                                    copy.remove("display");
+                                    if (copy.isEmpty() && lores.size() == 0) {
+                                        item.setTag(null);
+                                    } else {
+                                        item.setTag(tag);
+                                    }
                                 }
                             }
                             if (keep) {
