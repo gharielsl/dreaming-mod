@@ -52,6 +52,28 @@
         },
         {
           "type": "item",
+          "name": "minecraft:golden_apple",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "minecraft:limit_count",
+              "limit": 3
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "minecraft:enchanted_golden_apple",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:limit_count",
+              "limit": 1
+            }
+          ]
+        },
+        {
+          "type": "item",
           "name": "dreaming_mod:candy_jungle_tree_sapling",
           "weight": 2
         },

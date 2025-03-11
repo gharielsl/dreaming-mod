@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "dreaming_mod:candy_tree_planks"
+    }
+  },
+  "result": {
+    "item": "dreaming_mod:candy_tree_planks_slab",
+    "count": 6
+  }
+}

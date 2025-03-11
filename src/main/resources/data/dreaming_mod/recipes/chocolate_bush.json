@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "W",
+    "/"
+  ],
+  "key": {
+    "/": {
+      "item": "minecraft:grass"
+    },
+    "W": {
+      "item": "minecraft:cocoa_beans"
+    }
+  },
+  "result": {
+    "item": "dreaming_mod:chocolate_bush",
+    "count": 1
+  }
+}

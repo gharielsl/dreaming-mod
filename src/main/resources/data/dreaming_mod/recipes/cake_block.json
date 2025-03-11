@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "///",
+    "WBW",
+    "OOO"
+  ],
+  "key": {
+    "/": {
+      "item": "minecraft:milk_bucket"
+    },
+    "W": {
+      "item": "minecraft:sugar"
+    },
+    "B": {
+      "item": "minecraft:cake"
+    },
+    "O": {
+      "tag": "minecraft:hay_block"
+    }
+  },
+  "result": {
+    "item": "dreaming_mod:cake_block",
+    "count": 1
+  }
+}

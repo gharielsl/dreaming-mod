@@ -1,12 +1,12 @@
 {
   "structures": [
     {
-      "structure": "dreaming_mod:pancake",
+      "structure": "dreaming_mod:cake",
       "weight": 1
     }
   ],
   "placement": {
-    "salt": 219548456,
+    "salt": 7567423,
     "spacing": 20,
     "separation": 6,
     "type": "minecraft:random_spread"

@@ -6,21 +6,10 @@
   "biomes": "#dreaming_mod:has_structure/cupcake",
   "step": "surface_structures",
   "start_height": {
-    "absolute": 0
+    "above_bottom": 0
   },
+  "terrain_adaptation": "beard_thin",
   "project_start_to_heightmap": "WORLD_SURFACE_WG",
   "use_expansion_hack": false,
-  "spawn_overrides": {
-    "creature": {
-      "bounding_box": "piece",
-      "spawns": [
-        {
-          "type": "minecraft:parrot",
-          "weight": 1,
-          "minCount": 1,
-          "maxCount": 4
-        }
-      ]
-    }
-  }
+  "spawn_overrides": {}
 }

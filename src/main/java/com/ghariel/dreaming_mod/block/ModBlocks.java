@@ -1,9 +1,7 @@
 package com.ghariel.dreaming_mod.block;
 
 import com.ghariel.dreaming_mod.DreamingMod;
-import com.ghariel.dreaming_mod.block.bed.CloudBed;
-import com.ghariel.dreaming_mod.block.bed.NoDreamBed;
-import com.ghariel.dreaming_mod.block.bed.StarBed;
+import com.ghariel.dreaming_mod.block.bed.*;
 import com.ghariel.dreaming_mod.item.ModItems;
 import com.ghariel.dreaming_mod.worldgen.feature.tree.CandyJungleTreeGrower;
 import com.ghariel.dreaming_mod.worldgen.feature.tree.CandyTreeGrower;
@@ -12,9 +10,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -32,8 +28,8 @@ public class ModBlocks {
     public static final RegistryObject<Block> PANCAKE_BLOCK = registerBlock("pancake_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.CAKE)));
 
-    public static final RegistryObject<Block> CANDY_TREE_SAPLING = registerRareBlock("candy_tree_sapling",
-            () -> new CandyTreeSapling(new CandyTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)), Rarity.UNCOMMON);
+    public static final RegistryObject<Block> CANDY_TREE_SAPLING = BLOCKS.register("candy_tree_sapling",
+            () -> new CandyTreeSapling(new CandyTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
 
     public static final RegistryObject<Block> RICH_TREE_SAPLING = registerRareBlock("rich_tree_sapling",
             () -> new RichTreeSapling(new RichTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)), Rarity.EPIC);
@@ -50,6 +46,12 @@ public class ModBlocks {
     public static final RegistryObject<Block> CANDY_TREE_PLANKS = registerBlock("candy_tree_planks",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
 
+    public static final RegistryObject<Block> CANDY_TREE_SLAB = registerBlock("candy_tree_planks_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_SLAB)));
+
+    public static final RegistryObject<Block> CANDY_TREE_STAIRS = registerBlock("candy_tree_planks_stairs",
+            () -> new StairBlock(() -> CANDY_TREE_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.OAK_STAIRS)));
+
     public static final RegistryObject<Block> CANDY_BLOCK = registerBlock("candy_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
 
@@ -64,6 +66,12 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> CLOUD_BED_BLOCK =
             BLOCKS.register("cloud_bed", () -> new CloudBed(DyeColor.WHITE));
+
+    public static final RegistryObject<Block> ARCHITECT_BED_BLOCK =
+            BLOCKS.register("architect_bed", () -> new ArchitectBed(DyeColor.WHITE));
+
+    public static final RegistryObject<Block> PIRATE_BED_BLOCK =
+            BLOCKS.register("pirate_bed", () -> new PirateBed(DyeColor.WHITE));
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> registryObject = BLOCKS.register(name, block);

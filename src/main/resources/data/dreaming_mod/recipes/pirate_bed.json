@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "///",
+    "BBB",
+    "OOO"
+  ],
+  "key": {
+    "/": {
+      "item": "dreaming_mod:volcanic_ash_thread"
+    },
+    "B": {
+      "tag": "minecraft:wool"
+    },
+    "O": {
+      "item": "dreaming_mod:candy_tree_planks"
+    }
+  },
+  "result": {
+    "item": "dreaming_mod:pirate_bed",
+    "count": 1
+  }
+}

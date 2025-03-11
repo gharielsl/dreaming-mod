@@ -2,18 +2,15 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "///",
-    "BBW",
+    "BBB",
     "OOO"
   ],
   "key": {
     "/": {
       "item": "dreaming_mod:stardust_infused_silk"
     },
-    "W": {
-      "item": "minecraft:white_wool"
-    },
     "B": {
-      "item": "minecraft:blue_wool"
+      "tag": "minecraft:wool"
     },
     "O": {
       "tag": "minecraft:planks"

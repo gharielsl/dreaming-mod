@@ -5,6 +5,7 @@ import com.ghariel.dreaming_mod.util.StructureUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
@@ -49,7 +50,6 @@ public class DreamLevelTeleporter implements ITeleporter {
                 if (markers.containsKey("spawn")) {
                     BlockPos spawn = markers.get("spawn").get(0);
                     position = position.offset(spawn.getX(), spawn.getY(), spawn.getZ());
-                    repositionedEntity.sendSystemMessage(Component.literal(spawn.toString()));
                 }
             } else {
                 repositionedEntity.sendSystemMessage(Component.literal("null"));
@@ -57,6 +57,10 @@ public class DreamLevelTeleporter implements ITeleporter {
         }
 
         repositionedEntity.teleportTo(position.getX() + 0.5, position.getY(), position.getZ() + 0.5);
+
+        if (repositionedEntity instanceof ServerPlayer player && dream.getOnDreamStart() != null) {
+            dream.getOnDreamStart().accept(player);
+        }
 
         return repositionedEntity;
     }

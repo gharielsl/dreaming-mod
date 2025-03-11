@@ -10,6 +10,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
@@ -18,15 +19,15 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BedBlock;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
-import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
+import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.event.server.ServerStoppedEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -109,6 +110,7 @@ public class DreamEvents {
         }
         if (dream.isInDream()) {
             player.getInventory().load(dream.getInventory());
+            NBTUtil.loadEffects(player, dream.getEffects());
             player.setGameMode(dream.getGameType());
             player.setExperiencePoints(dream.getExperience());
             player.extinguishFire();
@@ -130,7 +132,7 @@ public class DreamEvents {
             if (dream != null) {
                 if (dream.isInDream()) {
                     for (ItemStack item : player.getInventory().items) {
-                        if (item != null) {
+                        if (item != null && !player.gameMode.isCreative()) {
                             boolean keep = false;
                             CompoundTag tag = item.getTag();
                             if (tag != null) {
@@ -145,7 +147,7 @@ public class DreamEvents {
                                 if (keep) {
                                     CompoundTag copy = tag.copy();
                                     copy.remove("display");
-                                    if (copy.isEmpty() && lores.size() == 0) {
+                                    if (copy.isEmpty() && lores.isEmpty()) {
                                         item.setTag(null);
                                     } else {
                                         item.setTag(tag);
@@ -178,6 +180,32 @@ public class DreamEvents {
     }
 
     @SubscribeEvent
+    public static void onEnderChestOpen(PlayerInteractEvent.RightClickBlock event) {
+        Level world = event.getLevel();
+        BlockPos pos = event.getPos();
+
+        if (event.getEntity() instanceof ServerPlayer player) {
+            if (world.getBlockState(pos).getBlock() == Blocks.ENDER_CHEST) {
+                PlayerDream dream = saveData.getPlayerDream(player.getStringUUID());
+                if (dream.isInDream()) {
+                    player.kill();
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onPlayerPickupStack(EntityItemPickupEvent event) {
+        if (event.getEntity() instanceof ServerPlayer player) {
+            ItemStack item = event.getItem().getItem();
+            PlayerDream dream = saveData.getPlayerDream(player.getStringUUID());
+            if (dream.isInDream() && item.getItem() == Items.APPLE) {
+                item.setHoverName(Component.literal("Definitely An Apple"));
+            }
+        }
+    }
+
+    @SubscribeEvent
     public static void onServerStopped(ServerStoppedEvent event) {
         saveData = null;
     }
@@ -205,9 +233,14 @@ public class DreamEvents {
         if (dream != null) {
             if (dream.isInDream()) {
                 dream.update(MinecraftServer.MS_PER_TICK / 1000.0);
-//                if (dream.getTimeInDream() > 120) {
-//                    event.player.kill();
-//                }
+                DreamType dreamType = DreamType.getDreamTypeById(dream.getDreamTypeId());
+                if (dreamType == null) {
+                    event.player.kill();
+                    return;
+                }
+                if (dream.getTimeInDream() > dreamType.getDefaultTime()) {
+                    event.player.kill();
+                }
             }
         }
     }

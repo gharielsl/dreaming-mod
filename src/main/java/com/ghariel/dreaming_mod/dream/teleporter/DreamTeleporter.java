@@ -45,6 +45,11 @@ public class DreamTeleporter {
         int x = random.nextInt(2 * MAX_SPAWN_DISTANCE + 1) - MAX_SPAWN_DISTANCE;
         int z = random.nextInt(2 * MAX_SPAWN_DISTANCE + 1) - MAX_SPAWN_DISTANCE;
 
+        if (level.equals("architect")) {
+            x = 0;
+            z = 0;
+        }
+
         player.changeDimension(dim, new DreamLevelTeleporter(new BlockPos(x, dream.getSpawnHeight(), z), dream));
     }
 }

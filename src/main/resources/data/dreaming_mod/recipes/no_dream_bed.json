@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BBB",
+    "OOO"
+  ],
+  "key": {
+    "B": {
+      "tag": "minecraft:wool"
+    },
+    "O": {
+      "tag": "minecraft:logs"
+    }
+  },
+  "result": {
+    "item": "dreaming_mod:no_dream_bed",
+    "count": 1
+  }
+}

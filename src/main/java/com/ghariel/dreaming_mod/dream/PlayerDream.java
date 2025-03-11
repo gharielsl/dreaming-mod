@@ -1,5 +1,6 @@
 package com.ghariel.dreaming_mod.dream;
 
+import com.ghariel.dreaming_mod.util.NBTUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -8,6 +9,7 @@ import net.minecraft.world.level.GameType;
 
 public class PlayerDream {
     private ListTag inventory;
+    private final CompoundTag effects;
     private final int experience;
     private final GameType gameType;
     private double timeInDream = 0;
@@ -19,12 +21,14 @@ public class PlayerDream {
         inventory = player.getInventory().save(inventory);
         experience = player.totalExperience;
         gameType = player.gameMode.getGameModeForPlayer();
+        effects = NBTUtil.saveEffects(player);
         this.dreamTypeId = dreamTypeId;
         this.isInDream = false;
     }
 
-    public PlayerDream(ListTag inventory, GameType gameType, int experience, double timeInDream, boolean isInDream, String dreamTypeId) {
+    public PlayerDream(ListTag inventory, CompoundTag effects, GameType gameType, int experience, double timeInDream, boolean isInDream, String dreamTypeId) {
         this.inventory = inventory;
+        this.effects = effects;
         this.gameType = gameType;
         this.experience = experience;
         this.timeInDream = timeInDream;
@@ -64,6 +68,10 @@ public class PlayerDream {
         isInDream = inDream;
     }
 
+    public CompoundTag getEffects() {
+        return effects;
+    }
+
     public static PlayerDream fromNBT(CompoundTag tag) {
         ListTag inventory = tag.getList("inventory", Tag.TAG_COMPOUND);
         int experience = tag.getInt("experience");
@@ -71,7 +79,8 @@ public class PlayerDream {
         double timeInDream = tag.getDouble("timeInDream");
         boolean isInDream = tag.getBoolean("isInDream");
         String dreamTypeId = tag.getString("dreamTypeId");
-        return new PlayerDream(inventory, gameType, experience, timeInDream, isInDream, dreamTypeId);
+        CompoundTag effects = tag.getCompound("effects");
+        return new PlayerDream(inventory, effects, gameType, experience, timeInDream, isInDream, dreamTypeId);
     }
 
     public CompoundTag toNBT() {
@@ -82,6 +91,7 @@ public class PlayerDream {
         tag.putDouble("timeInDream", timeInDream);
         tag.putBoolean("isInDream", isInDream);
         tag.putString("dreamTypeId", dreamTypeId);
+        tag.put("effects", effects);
         return tag;
     }
 }

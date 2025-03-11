@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "///",
+    "BBB",
+    "OOO"
+  ],
+  "key": {
+    "/": {
+      "item": "dreaming_mod:aether_vine"
+    },
+    "B": {
+      "tag": "minecraft:wool"
+    },
+    "O": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "result": {
+    "item": "dreaming_mod:architect_bed",
+    "count": 1
+  }
+}

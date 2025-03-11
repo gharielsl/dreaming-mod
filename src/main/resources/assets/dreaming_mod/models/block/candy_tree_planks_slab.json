@@ -1,0 +1,8 @@
+{
+    "parent": "minecraft:block/slab",
+    "textures": {
+        "bottom": "dreaming_mod:block/candy_tree_planks",
+        "side": "dreaming_mod:block/candy_tree_planks",
+        "top": "dreaming_mod:block/candy_tree_planks"
+    }
+}
