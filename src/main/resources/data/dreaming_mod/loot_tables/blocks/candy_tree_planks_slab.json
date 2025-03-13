@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "dreaming_mod:candy_tree_planks_slab"
+        }
+      ]
+    }
+  ],
+  "random_sequence": "dreaming_mod:blocks/candy_tree_planks_slab"
+}

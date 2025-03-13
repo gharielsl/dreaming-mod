@@ -63,7 +63,6 @@ repositories {
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-    implementation fg.deobf("curse.maven:worldedit-225608:4586218")
 }
 
 tasks.named('processResources', ProcessResources).configure {
