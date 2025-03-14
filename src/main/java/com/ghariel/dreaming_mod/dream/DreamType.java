@@ -20,6 +20,8 @@ public class DreamType {
 
     public static DreamType[] defaultLevel = new DreamType[]{
             new DreamType(ModDimensions.DREAM_LEVEL_KEY, null, null, -1, 140, null),
+            new DreamType(ModDimensions.DREAM_LEVEL_KEY, null, null, -1, 140, null),
+            new DreamType(ModDimensions.NIGHTMARE_LEVEL_KEY, null, null, -1,140, null),
             new DreamType(ModDimensions.NIGHTMARE_LEVEL_KEY, null, null, -1,140, null),
             new DreamType(ModDimensions.DREAM_LEVEL_KEY, null, GameType.CREATIVE, -1,140, null),
             new DreamType(ModDimensions.DREAM_LEVEL_KEY, "dream_default_01", null, 128,130, null),
@@ -28,6 +30,8 @@ public class DreamType {
 
     public static DreamType[] starLevel = new DreamType[]{
             new DreamType(ModDimensions.DREAM_LEVEL_KEY, null, null, -1, 140, null),
+            new DreamType(ModDimensions.DREAM_LEVEL_KEY, null, null, -1, 140, null),
+            new DreamType(ModDimensions.NIGHTMARE_LEVEL_KEY, null, null, -1,140, null),
             new DreamType(ModDimensions.NIGHTMARE_LEVEL_KEY, null, null, -1,140, null),
             new DreamType(ModDimensions.DREAM_LEVEL_KEY, null, GameType.CREATIVE, -1,140, null),
             new DreamType(ModDimensions.DREAM_LEVEL_KEY, "dream_star_01", null, 128,140, null),
@@ -36,6 +40,8 @@ public class DreamType {
 
     public static DreamType[] cloudLevel = new DreamType[]{
             new DreamType(ModDimensions.DREAM_LEVEL_KEY, null, null, -1, 140*2, null),
+            new DreamType(ModDimensions.DREAM_LEVEL_KEY, null, null, -1, 140*2, null),
+            new DreamType(ModDimensions.NIGHTMARE_LEVEL_KEY, null, null, -1,140*2, null),
             new DreamType(ModDimensions.NIGHTMARE_LEVEL_KEY, null, null, -1,140*2, null),
             new DreamType(ModDimensions.DREAM_LEVEL_KEY, null, GameType.CREATIVE, -1,140*2, null)
     };

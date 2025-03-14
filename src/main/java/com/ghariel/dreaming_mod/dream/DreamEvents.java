@@ -9,7 +9,6 @@ import com.ghariel.dreaming_mod.worldgen.dimension.ModDimensions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
@@ -19,7 +18,6 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.Blocks;
@@ -31,9 +29,7 @@ import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.event.server.ServerStoppedEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-
-import java.util.ArrayList;
-import java.util.List;
+import top.theillusivec4.curios.api.CuriosApi;
 
 import static com.ghariel.dreaming_mod.util.PlayerUtil.randomizeInventory;
 
@@ -110,6 +106,14 @@ public class DreamEvents {
         }
         if (dream.isInDream()) {
             player.getInventory().load(dream.getInventory());
+            try {
+                Class<?> clazz = Class.forName("top.theillusivec4.curios.api.CuriosApi");
+                CuriosApi.getCuriosInventory(player).ifPresent((inventory) -> {
+                    inventory.loadInventory(dream.getCuriousInventory());
+                });
+            } catch (Exception e) {
+                // curios not installed
+            }
             NBTUtil.loadEffects(player, dream.getEffects());
             player.setGameMode(dream.getGameType());
             player.setExperiencePoints(dream.getExperience());
@@ -187,8 +191,10 @@ public class DreamEvents {
         if (event.getEntity() instanceof ServerPlayer player) {
             if (world.getBlockState(pos).getBlock() == Blocks.ENDER_CHEST) {
                 PlayerDream dream = saveData.getPlayerDream(player.getStringUUID());
-                if (dream.isInDream()) {
-                    player.kill();
+                if (dream != null) {
+                    if (dream.isInDream()) {
+                        player.kill();
+                    }
                 }
             }
         }
@@ -199,6 +205,9 @@ public class DreamEvents {
         if (event.getEntity() instanceof ServerPlayer player) {
             ItemStack item = event.getItem().getItem();
             PlayerDream dream = saveData.getPlayerDream(player.getStringUUID());
+            if (dream == null) {
+                return;
+            }
             if (dream.isInDream() && item.getItem() == Items.APPLE) {
                 item.setHoverName(Component.literal("Definitely An Apple"));
             }

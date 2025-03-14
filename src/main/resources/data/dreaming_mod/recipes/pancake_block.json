@@ -16,7 +16,7 @@
       "item": "minecraft:egg"
     },
     "O": {
-      "tag": "minecraft:hay_block"
+      "item": "minecraft:hay_block"
     }
   },
   "result": {
