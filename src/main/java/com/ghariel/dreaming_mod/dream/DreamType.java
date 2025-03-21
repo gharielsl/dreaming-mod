@@ -43,7 +43,9 @@ public class DreamType {
             new DreamType(ModDimensions.DREAM_LEVEL_KEY, null, null, -1, 140*2, null),
             new DreamType(ModDimensions.NIGHTMARE_LEVEL_KEY, null, null, -1,140*2, null),
             new DreamType(ModDimensions.NIGHTMARE_LEVEL_KEY, null, null, -1,140*2, null),
-            new DreamType(ModDimensions.DREAM_LEVEL_KEY, null, GameType.CREATIVE, -1,140*2, null)
+            new DreamType(ModDimensions.DREAM_LEVEL_KEY, null, GameType.CREATIVE, -1,140*2, null),
+            new DreamType(ModDimensions.DREAM_LEVEL_KEY, "dream_cloud_01", GameType.ADVENTURE, 128,140*2, null),
+            new DreamType(ModDimensions.DREAM_LEVEL_KEY, "dream_cloud_02", GameType.ADVENTURE, 128,140*2, null)
     };
 
     public static DreamType[] architectBed = new DreamType[]{
